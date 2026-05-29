@@ -53,7 +53,7 @@ public class ToDoList {
         Scanner scanner = new Scanner(System.in);
         Tasks callTasks = new Tasks();
         for (; ; ) {
-            System.out.println("\n\t Заметки.\n");
+            System.out.println("\n\t Заметки.");
             System.out.println("Действия: \n 1.  Посмотреть текущие задачи. \n 2.  Создать новую задачу. \n 3.  Удалить задачу. \n 4.  Выход. ");
             System.out.print("Введите действие: ");
             int action = Integer.parseInt(scanner.nextLine());
