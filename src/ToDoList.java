@@ -1,35 +1,41 @@
 import java.util.Scanner;
 
 class Tasks {
-    String[] tasks = new String[10];
-    String[] nameTasks = new String[10];
+    String[] tasks = new String[11];
+    String[] nameTasks = new String[11];
     int countNameTasks = 0;
     int countTasks = 0;
 
     void showTasks() {
+        for (int i = 0; i < nameTasks.length - 9; i++) {
+//            if (nameTasks[i] == null) {
+//                System.out.print(" ");
+//            } else {
+                System.out.println((i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
+//            }
+        }
+        System.out.println("ПРОВЕРКА!");
+        for (int j = 0; j < nameTasks.length - 9; j++) {
+            System.out.println(nameTasks[j] + ": ");
+            System.out.println(tasks[j] + "\n");
+        }
+    }
+
+
+    void newNameTasks(String newNameTask) {
         for (int i = 0; i < nameTasks.length; i++) {
             if (nameTasks[i] == null) {
-                System.out.print("");
-            } else {
-                System.out.println((i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
+                nameTasks[i] = newNameTask;
             }
         }
     }
 
-    void newNameTasks(String newNameTask) {
-        for (; countNameTasks < nameTasks.length;) {
-            nameTasks[countNameTasks] = newNameTask;
-            countNameTasks++;
-            break;
-        }
-    }
-
     void newTasks(String newTask) {
-        for (; countTasks < tasks.length; ) {
             tasks[countTasks] = newTask;
             countTasks++;
-            break;
-        }
+            if (countTasks >= 10) {
+                System.out.println("Это последняя задача которую вы можете написать.");
+            }
     }
 
     void deleteTasks(int deleteTask) {
@@ -37,6 +43,16 @@ class Tasks {
             if (deleteTask == (i + 1)) {
                 nameTasks[i] = null;
                 tasks[i] = null;
+                for (int t = 0; t < nameTasks.length - 1; t++) {
+                    if (nameTasks[t] == null) {
+                        nameTasks[t] = nameTasks[t + 1];
+                    }
+                }
+                for (int g = 0; g < tasks.length - 1; g++) {
+                    if (tasks[g] == null) {
+                        tasks[g] = tasks[g + 1];
+                    }
+                }
                 System.out.println("Задача успешно удалена :)");
                 break;
             } else {
