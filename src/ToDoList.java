@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+class Tasks {
+    String[] tasks = new String[10];
+    String[] nameTasks = new String[10];
+    int countNameTasks = 0;
+    int countTasks = 0;
+
+    void showTasks() {
+        for (int i = 0; i < nameTasks.length; i++) {
+            if (nameTasks[i] == null) {
+                System.out.print("");
+            } else {
+                System.out.println((i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
+            }
+        }
+    }
+
+    void newNameTasks(String newNameTask) {
+        for (; countNameTasks < nameTasks.length;) {
+            nameTasks[countNameTasks] = newNameTask;
+            countNameTasks++;
+            break;
+        }
+    }
+
+    void newTasks(String newTask) {
+        for (; countTasks < tasks.length; ) {
+            tasks[countTasks] = newTask;
+            countTasks++;
+            break;
+        }
+    }
+
+    void deleteTasks(int deleteTask) {
+        for (int i = 0; i < nameTasks.length; i++) {
+            if (deleteTask == (i + 1)) {
+                nameTasks[i] = null;
+                tasks[i] = null;
+                System.out.println("Задача успешно удалена :)");
+                break;
+            } else {
+                System.out.println("Такой задачи нету или она уже удалена :(");
+                break;
+            }
+        }
+    }
+}
+
+
+public class ToDoList {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Tasks callTasks = new Tasks();
+        for (; ; ) {
+            System.out.println("\n\t Заметки.\n");
+            System.out.println("Действия: \n 1.  Посмотреть текущие задачи. \n 2.  Создать новую задачу. \n 3.  Удалить задачу. \n 4.  Выход. ");
+            System.out.print("Введите действие: ");
+            int action = Integer.parseInt(scanner.nextLine());
+            switch (action) {
+                case 1:
+                    System.out.println("Текущие задачи:");
+                    callTasks.showTasks();
+                    break;
+                case 2:
+                    System.out.print("Напишите название для новой задачи: ");
+                    String newNameTask = scanner.nextLine();
+                    callTasks.newNameTasks(newNameTask);
+                    System.out.print("Напишите задачу: ");
+                    String newTask = scanner.nextLine();
+                    callTasks.newTasks(newTask);
+                    break;
+                case 3:
+                    System.out.print("Напишите номер задачи которую хотите удалить: ");
+                    int deleteTask = Integer.parseInt(scanner.nextLine());
+                    callTasks.deleteTasks(deleteTask);
+                    break;
+                case 4:
+                    System.out.println("Закрываем приложение...");
+                    break;
+                default:
+                    System.out.println("Такого выбора нету, попробуйте еще раз");
+            }
+            if (action == 5) {
+                break;
+            }
+        }
+    }
+}
