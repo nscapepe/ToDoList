@@ -3,8 +3,6 @@ import java.util.Scanner;
 class Tasks {
     String[] tasks = new String[11];
     String[] nameTasks = new String[11];
-    int countNameTasks = 0;
-    int countTasks = 0;
 
     void showTasks() {
         for (int i = 0; i < nameTasks.length; i++) {
