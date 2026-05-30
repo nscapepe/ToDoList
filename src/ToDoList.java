@@ -6,10 +6,15 @@ class Tasks {
 
     void showTasks() {
         for (int i = 0; i < nameTasks.length; i++) {
-            if (nameTasks[i] == null) {
-                System.out.print(" ");
+            if (nameTasks[0] == null) {
+                System.out.print("Задач нету");
+                break;
             } else {
+                if (nameTasks[i] == null) {
+                    break;
+                } else {
                 System.out.println((i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
+                }
             }
         }
     }
