@@ -98,7 +98,7 @@ public class ToDoList {
                 default:
                     System.out.println("Такого выбора нету, попробуйте еще раз");
             }
-            if (action == 5) {
+            if (action == 4) {
                 break;
             }
         }
