@@ -3,19 +3,24 @@ import java.util.Scanner;
 class Tasks {
     String[] tasks = new String[11];
     String[] nameTasks = new String[11];
+    boolean[] completingTasks = new boolean[11];
 
     void showTasks() {
         for (int i = 0; i < nameTasks.length; i++) {
             if (nameTasks[0] == null) {
-                System.out.print("Задач нету");
+                System.out.print("Задач нету :( \n");
+                break;
+            }
+            if (nameTasks[i] == null) {
                 break;
             } else {
-                if (nameTasks[i] == null) {
-                    break;
+                System.out.println("Задача №" + (i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
+                if (completingTasks[i] == false) {
+                    System.out.println("\nСтатус задачи: В процессе.\n");
                 } else {
-                System.out.println((i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
+                    System.out.println("\nСтатус задачи: Выполнена.\n");
                 }
-            }
+                }
         }
     }
 
@@ -39,17 +44,21 @@ class Tasks {
     }
 
     void deleteTasks(int deleteTask) {
+        boolean tempCompletedMark;
         String tempNameTasks;
         String tempTasks;
-        for (int i = 0; i < nameTasks.length; i++) {
-            if (deleteTask == (i + 1)) {
-                nameTasks[i] = null;
-                tasks[i] = null;
+            if (nameTasks[deleteTask - 1] != null) {
+                nameTasks[deleteTask - 1] = null;
+                tasks[deleteTask - 1] = null;
                 for (int t = 0; t < nameTasks.length - 1; t++) {
                     if (nameTasks[t] == null) {
                         tempNameTasks = nameTasks[t];
                         nameTasks[t] = nameTasks[t + 1];
                         nameTasks[t + 1] = tempNameTasks;
+
+                        tempCompletedMark = completingTasks[t];
+                        completingTasks[t] = completingTasks[t + 1];
+                        completingTasks[t + 1] = tempCompletedMark;
                     }
                 }
                 for (int g = 0; g < tasks.length - 1; g++) {
@@ -60,11 +69,17 @@ class Tasks {
                     }
                 }
                 System.out.println("Задача успешно удалена :)");
-                break;
             } else {
                 System.out.println("Такой задачи нету или она уже удалена :(");
-                break;
             }
+    }
+
+    void markAsCompleted(int markAsCompleted) {
+        if (nameTasks[markAsCompleted - 1] == null) {
+            System.out.println("Такой задачи нету");
+        } else {
+        completingTasks[markAsCompleted - 1] = true;
+        System.out.println("Теперь " + markAsCompleted + " задача отмечена выполненной." );
         }
     }
 }
@@ -76,7 +91,7 @@ public class ToDoList {
         Tasks callTasks = new Tasks();
         for (; ; ) {
             System.out.println("\n\t Заметки.");
-            System.out.println("Действия: \n 1.  Посмотреть текущие задачи. \n 2.  Создать новую задачу. \n 3.  Удалить задачу. \n 4.  Выход. ");
+            System.out.println("Действия: \n 1.  Посмотреть текущие задачи. \n 2.  Создать новую задачу. \n 3.  Удалить задачу. \n 4.  Отметить задачу выполненной. \n 5.  Выход. ");
             System.out.print("Введите действие: ");
             int action = Integer.parseInt(scanner.nextLine());
             switch (action) {
@@ -98,12 +113,17 @@ public class ToDoList {
                     callTasks.deleteTasks(deleteTask);
                     break;
                 case 4:
+                    System.out.print("Напишите номер задачи которую хотите отметить выполненной: ");
+                    int markAsCompleted = Integer.parseInt(scanner.nextLine());
+                    callTasks.markAsCompleted(markAsCompleted);
+                    break;
+                case 5:
                     System.out.println("Закрываем приложение...");
                     break;
                 default:
                     System.out.println("Такого выбора нету, попробуйте еще раз");
             }
-            if (action == 4) {
+            if (action == 5) {
                 break;
             }
         }
