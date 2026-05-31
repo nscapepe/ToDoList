@@ -18,9 +18,9 @@ class Tasks {
                 if (completingTasks[i] == false) {
                     System.out.println("\nСтатус задачи: В процессе.\n");
                 } else {
-                    System.out.println("\nСтатус задачи: Выполнена.\n");
+                    System.out.println("\nСтатус задачи: Выполнена.\n ");
                 }
-                }
+            }
         }
     }
 
