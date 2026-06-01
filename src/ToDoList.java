@@ -1,21 +1,22 @@
 import java.util.Scanner;
 
 class Tasks {
-    String[] tasks = new String[11];
-    String[] nameTasks = new String[11];
-    boolean[] completingTasks = new boolean[11];
+    // ПОМЕНЯТЬ НА ArrayList !!!
+    String[] name = new String[11];
+    String[] description = new String[11];
+    boolean[] completed = new boolean[11];
 
     void showTasks() {
-        for (int i = 0; i < nameTasks.length; i++) {
-            if (nameTasks[0] == null) {
+        for (int i = 0; i < name.length; i++) {
+            if (name[0] == null) {
                 System.out.print("Задач нету :( \n");
                 break;
             }
-            if (nameTasks[i] == null) {
+            if (name[i] == null) {
                 break;
             } else {
-                System.out.println("Задача №" + (i + 1) + ". " + nameTasks[i] + ":\n\t" + tasks[i]);
-                if (completingTasks[i] == false) {
+                System.out.println("Задача №" + (i + 1) + ". " + name[i] + ":\n\t" + description[i]);
+                if (completed[i] == false) {
                     System.out.println("\nСтатус задачи: В процессе.\n");
                 } else {
                     System.out.println("\nСтатус задачи: Выполнена.\n ");
@@ -26,18 +27,18 @@ class Tasks {
 
 
     void newNameTasks(String newNameTask) {
-        for (int i = 0; i < nameTasks.length; i++) {
-            if (nameTasks[i] == null) {
-                nameTasks[i] = newNameTask;
+        for (int i = 0; i < name.length; i++) {
+            if (name[i] == null) {
+                name[i] = newNameTask;
                 break;
             }
         }
     }
 
     void newTasks(String newTask) {
-        for (int i = 0; i < tasks.length; i++) {
-            if (tasks[i] == null) {
-                tasks[i] = newTask;
+        for (int i = 0; i < description.length; i++) {
+            if (description[i] == null) {
+                description[i] = newTask;
                 break;
             }
         }
@@ -45,27 +46,27 @@ class Tasks {
 
     void deleteTasks(int deleteTask) {
         boolean tempCompletedMark;
-        String tempNameTasks;
-        String tempTasks;
-            if (nameTasks[deleteTask - 1] != null) {
-                nameTasks[deleteTask - 1] = null;
-                tasks[deleteTask - 1] = null;
-                for (int t = 0; t < nameTasks.length - 1; t++) {
-                    if (nameTasks[t] == null) {
-                        tempNameTasks = nameTasks[t];
-                        nameTasks[t] = nameTasks[t + 1];
-                        nameTasks[t + 1] = tempNameTasks;
+        String tempNameTask;
+        String tempTask;
+            if (name[deleteTask - 1] != null) {
+                name[deleteTask - 1] = null;
+                description[deleteTask - 1] = null;
+                for (int t = 0; t < name.length - 1; t++) {
+                    if (name[t] == null) {
+                        tempNameTask = name[t];
+                        name[t] = name[t + 1];
+                        name[t + 1] = tempNameTask;
 
-                        tempCompletedMark = completingTasks[t];
-                        completingTasks[t] = completingTasks[t + 1];
-                        completingTasks[t + 1] = tempCompletedMark;
+                        tempCompletedMark = completed[t];
+                        completed[t] = completed[t + 1];
+                        completed[t + 1] = tempCompletedMark;
                     }
                 }
-                for (int g = 0; g < tasks.length - 1; g++) {
-                    if (tasks[g] == null) {
-                        tempTasks = tasks[g];
-                        tasks[g] = tasks[g + 1];
-                        tasks[g + 1] = tempTasks;
+                for (int g = 0; g < description.length - 1; g++) {
+                    if (description[g] == null) {
+                        tempTask = description[g];
+                        description[g] = description[g + 1];
+                        description[g + 1] = tempTask;
                     }
                 }
                 System.out.println("Задача успешно удалена :)");
@@ -75,10 +76,10 @@ class Tasks {
     }
 
     void markAsCompleted(int markAsCompleted) {
-        if (nameTasks[markAsCompleted - 1] == null) {
+        if (name[markAsCompleted - 1] == null) {
             System.out.println("Такой задачи нету");
         } else {
-        completingTasks[markAsCompleted - 1] = true;
+            completed[markAsCompleted - 1] = true;
         System.out.println("Теперь " + markAsCompleted + " задача отмечена выполненной." );
         }
     }
@@ -93,6 +94,7 @@ public class ToDoList {
             System.out.println("\n\t Заметки.");
             System.out.println("Действия: \n 1.  Посмотреть текущие задачи. \n 2.  Создать новую задачу. \n 3.  Удалить задачу. \n 4.  Отметить задачу выполненной. \n 5.  Выход. ");
             System.out.print("Введите действие: ");
+            // СДЕЛАТЬ TRY\CATCH !!!
             int action = Integer.parseInt(scanner.nextLine());
             switch (action) {
                 case 1:
