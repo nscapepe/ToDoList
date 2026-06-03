@@ -1,86 +1,53 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Tasks {
-    // ПОМЕНЯТЬ НА ArrayList !!!
-    String[] name = new String[11];
-    String[] description = new String[11];
-    boolean[] completed = new boolean[11];
+    ArrayList<String> name = new ArrayList<>();
+    ArrayList<String> description = new ArrayList<>();
+    ArrayList<Integer> completed = new ArrayList<>();
 
     void showTasks() {
-        for (int i = 0; i < name.length; i++) {
-            if (name[0] == null) {
-                System.out.print("Задач нету :( \n");
-                break;
-            }
-            if (name[i] == null) {
-                break;
-            } else {
-                System.out.println("Задача №" + (i + 1) + ". " + name[i] + ":\n\t" + description[i]);
-                if (completed[i] == false) {
-                    System.out.println("\nСтатус задачи: В процессе.\n");
+        if (name.isEmpty()) {
+            System.out.println("Задач нету :( \n");
+        } else {
+            for (int i = 0; i < name.size(); i++) {
+                System.out.println("Задача №" + (i + 1) + ". " + name.get(i) + ":\n\t" + description.get(i));
+                if (completed.get(i) == 0) {
+                    System.out.println("Статус задачи: В процессе.\n");
                 } else {
-                    System.out.println("\nСтатус задачи: Выполнена.\n ");
+                    System.out.println("Статус задачи: Выполнена.\n ");
                 }
             }
         }
     }
 
 
-    void newNameTasks(String newNameTask) {
-        for (int i = 0; i < name.length; i++) {
-            if (name[i] == null) {
-                name[i] = newNameTask;
-                break;
-            }
-        }
+    void addNameTask(String newNameTask) {
+        name.add(newNameTask);
+        completed.add(0);
     }
 
-    void newTasks(String newTask) {
-        for (int i = 0; i < description.length; i++) {
-            if (description[i] == null) {
-                description[i] = newTask;
-                break;
-            }
-        }
+    void addTask(String newTask) {
+        description.add(newTask);
     }
 
-    void deleteTasks(int deleteTask) {
-        boolean tempCompletedMark;
-        String tempNameTask;
-        String tempTask;
-            if (name[deleteTask - 1] != null) {
-                name[deleteTask - 1] = null;
-                description[deleteTask - 1] = null;
-                for (int t = 0; t < name.length - 1; t++) {
-                    if (name[t] == null) {
-                        tempNameTask = name[t];
-                        name[t] = name[t + 1];
-                        name[t + 1] = tempNameTask;
-
-                        tempCompletedMark = completed[t];
-                        completed[t] = completed[t + 1];
-                        completed[t + 1] = tempCompletedMark;
-                    }
-                }
-                for (int g = 0; g < description.length - 1; g++) {
-                    if (description[g] == null) {
-                        tempTask = description[g];
-                        description[g] = description[g + 1];
-                        description[g + 1] = tempTask;
-                    }
-                }
-                System.out.println("Задача успешно удалена :)");
-            } else {
-                System.out.println("Такой задачи нету или она уже удалена :(");
-            }
+    void deleteTask(int deleteTask) {
+        if (name.get(deleteTask - 1).isEmpty()) {
+            System.out.println("Такой задачи нету.");
+        } else {
+            name.remove(deleteTask - 1);
+            description.remove(deleteTask - 1);
+            completed.remove(deleteTask - 1);
+            System.out.println("Задача успешно удалена :)");
+        }
     }
 
     void markAsCompleted(int markAsCompleted) {
-        if (name[markAsCompleted - 1] == null) {
+        if (name.get(markAsCompleted - 1).isEmpty()) {
             System.out.println("Такой задачи нету");
         } else {
-            completed[markAsCompleted - 1] = true;
-        System.out.println("Теперь " + markAsCompleted + " задача отмечена выполненной." );
+            completed.set(markAsCompleted - 1, 1);
+            System.out.println("Теперь " + markAsCompleted + " задача отмечена выполненной." );
         }
     }
 }
@@ -104,15 +71,15 @@ public class ToDoList {
                 case 2:
                     System.out.print("Напишите название для новой задачи: ");
                     String newNameTask = scanner.nextLine();
-                    callTasks.newNameTasks(newNameTask);
+                    callTasks.addNameTask(newNameTask);
                     System.out.print("Напишите задачу: ");
                     String newTask = scanner.nextLine();
-                    callTasks.newTasks(newTask);
+                    callTasks.addTask(newTask);
                     break;
                 case 3:
                     System.out.print("Напишите номер задачи которую хотите удалить: ");
                     int deleteTask = Integer.parseInt(scanner.nextLine());
-                    callTasks.deleteTasks(deleteTask);
+                    callTasks.deleteTask(deleteTask);
                     break;
                 case 4:
                     System.out.print("Напишите номер задачи которую хотите отметить выполненной: ");
